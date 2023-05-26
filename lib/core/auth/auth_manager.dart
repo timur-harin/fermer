@@ -54,8 +54,14 @@ class AuthorizationManager {
   }
 
   Future<AccountCreateResult> registerAccount(
-      String email, String username, String password) async {
-    var data = {"email": email, "username": username, "password": password};
+      String email, String username, String password, String role) async {
+    var data = {
+      "email": email,
+      "username": username,
+      "password": password,
+      "role": role
+    };
+    print(data);
     Response? response;
     try {
       response = await _dio.post("${ServerSettings.baseUrl}/users/register/",
