@@ -205,7 +205,16 @@ class _ChatPageViewState extends State<ChatPageView> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.send),
-                              onPressed: () {},
+                              onPressed: () {
+                                childList.add(Align(
+                                  alignment: const Alignment(1, 0),
+                                  child: SentMessageWidget(
+                                    content: _text.text,
+                                    time: '21:36 PM',
+                                    isImage: false,
+                                  ),
+                                ));
+                              },
                             ),
                             IconButton(
                               icon: const Icon(Icons.image),
