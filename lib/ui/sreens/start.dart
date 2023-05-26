@@ -24,17 +24,17 @@ class _StartPageState extends State<StartPage> {
         appBar: CustomAppBar(),
         body: SafeArea(
           child: Column(children: [
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/register");
-              },
-              child: Text("Register"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/login");
-              },
-              child: Text("Login"),),
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, "/register");
+            //   },
+            //   child: Text("Register"),
+            // ),
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, "/login");
+            //   },
+            //   child: Text("Login"),),
               SizedBox(
                 height: 300,
                 child: FutureBuilder(

@@ -70,16 +70,16 @@ class _LoginPageState extends State<LoginPage> {
                               height: MediaQuery.of(context).size.height * 0.07,
                               child: TextFormField(
                                 controller: _mailController,
-                                // `validator: (value) {
-                                //   if (value!.isEmpty) {
-                                //     return 'Пожалуйста, введите почту';
-                                //   } else if (!RegExp(
-                                //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                //       .hasMatch(value)) {
-                                //     return 'Пожалуйста, введите корректную почту';
-                                //   }
-                                //   return null;
-                                // },`
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Пожалуйста, введите почту';
+                                  } else if (!RegExp(
+                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                      .hasMatch(value)) {
+                                    return 'Пожалуйста, введите корректную почту';
+                                  }
+                                  return null;
+                                },
                                 decoration: InputDecoration(
                                   hintStyle: Theme.of(context)
                                       .textTheme
@@ -139,6 +139,12 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/register'),
+
+                    child: Text("Еще нет аккаунта? Зарегистрируйся", style: Theme.of(context).textTheme.displaySmall,),
+                  ),
                   
                   Padding(
                     padding: const EdgeInsets.fromLTRB(35, 30, 35, 50),
@@ -155,7 +161,6 @@ class _LoginPageState extends State<LoginPage> {
                             var response = await AuthorizationManager()
                                 .authorize(
                                     _mailController.text,
-                                    
                                     _passwordController.text
                                     );
                             if (response.isAuthorized == true) {

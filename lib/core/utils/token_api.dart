@@ -30,4 +30,14 @@ class TokenApi {
     await TokenApi.setAccessToken(response.data["access"]);
     await TokenApi.setRefreshToken(response.data["refresh"]);
   }
+
+  static saveName(String? name) async {
+    await _storage.write(key: "name", value: name);
+  }
+
+  static getName() async {
+    return await _storage.read(key: "name");
+  }
+
+  
 }

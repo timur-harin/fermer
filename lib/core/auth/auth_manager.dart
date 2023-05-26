@@ -18,9 +18,9 @@ class AccountCreateResult {
 class AuthorizationManager {
   final _dio = Dio();
 
-  Future<AuthResult> authorize(String username, String password) async {
+  Future<AuthResult> authorize(String email, String password) async {
     // check for authorization
-    var data = {"username": username, "password": password};
+    var data = {"email": email, "password": password};
     Response? response;
     try {
       response = await _dio.post("${ServerSettings.baseUrl}/users/login/",
@@ -37,6 +37,7 @@ class AuthorizationManager {
 
     await TokenApi.setRefreshToken(response!.data["refresh"]);
     await TokenApi.setAccessToken(response.data["access"]);
+    await TokenApi.saveName(email);
 
     return AuthResult()..isAuthorized = true;
   }
@@ -53,12 +54,13 @@ class AuthorizationManager {
     return true;
   }
 
+
+
   Future<AccountCreateResult> registerAccount(
-      String email, String username, String password, String role) async {
+      String email, String name, String password, String role) async {
     var data = {
       "email": email,
-      "username": username,
-      "full_name": username,
+      "name": name,
       "password": password,
       "role": role
     };
@@ -69,25 +71,28 @@ class AuthorizationManager {
     } on DioError catch (e) {
       if (e.response == null)
         return AccountCreateResult()
-          ..errorMessage = "Connection to server lost.";
-      if (e.response!.statusCode == 400) {
-        print(e.response!.data);
+          ..errorMessage = "Потеряно соединение с сервером.";
+      if (e.response!.statusCode == 401 || e.response!.statusCode == 400) {
         return AccountCreateResult()
-          ..errorMessage = e.message;
+          ..errorMessage = "Уже существует аккаунт с таким email";
       }
     }
     if (response == null) {
-      return AccountCreateResult()..errorMessage = "Some error happened";
+      return AccountCreateResult()..errorMessage = "Неизвестная ошибка";
     }
 
     await TokenApi.setRefreshToken(response.data["refresh"]);
     await TokenApi.setAccessToken(response.data["access"]);
+    await TokenApi.saveName(email);
+    
 
     return AccountCreateResult()..isCreated = true;
   }
 
+
   void logout() {
     TokenApi.setAccessToken(null);
     TokenApi.setRefreshToken(null);
+    TokenApi.saveName(null);
   }
 }

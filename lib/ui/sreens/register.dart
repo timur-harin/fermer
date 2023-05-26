@@ -16,7 +16,7 @@ enum UserType { FM, BY, AD }
 class _RegisterPageState extends State<RegisterPage> {
   final dio = Dio();
 
-  var _fullNameController = TextEditingController();
+    var _nameController = TextEditingController();
     var _mailController = TextEditingController();
     var _passwordController = TextEditingController();
     UserType selectedUserType = UserType.BY;
@@ -76,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.07,
                               child: TextFormField(
-                                controller: _fullNameController,
+                                controller: _nameController,
                                 validator: (value) {
                                   if (value!.isEmpty || value.length < 2) {
                                     return 'Пожалуйста, введите имя';
@@ -92,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               0, 32, 51, 0.35)),
                                   hintText: 'Иван',
                                 ),
-                                onSaved: (newValue) => _fullNameController.text = newValue!,
+                                onSaved: (newValue) => _nameController.text = newValue!,
                               )),
                         ]),
                   ),
@@ -283,7 +283,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             var response = await AuthorizationManager()
                                 .registerAccount(
                                     _mailController.text,
-                                    _fullNameController.text,
+                                    _nameController.text,
                                     _passwordController.text,
                                     selectedUserType.name);
                             if (response.isCreated == true) {

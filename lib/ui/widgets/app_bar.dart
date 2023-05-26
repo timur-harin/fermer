@@ -1,7 +1,12 @@
+import 'package:fermer/core/auth/auth_manager.dart';
+import 'package:fermer/core/utils/token_api.dart';
+import 'package:fermer/ui/kit/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
+
+
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -44,14 +49,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       ), 
                       ]),
                       SizedBox(width: screenSize.width / 20),
-                      SearchBar(),
+                      
+
+                      // Here search bar
+                      Spacer(),
                       for (AppBarElement element in elements)
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushNamed(context, element.path);
+                              
                             },
+
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -62,6 +71,40 @@ class _CustomAppBarState extends State<CustomAppBar> {
                           ),
                         ),
                       
+                      IconButton(
+                        icon: FutureBuilder(builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.data == true) {
+                                return CircleAvatar(radius: 40, backgroundColor: CustomColors.deepGreen, child: FutureBuilder(builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(snapshot.data![0], style: TextStyle(color: Colors.white, fontSize: 20));
+                                  } else {
+                                    return Text("-", style: TextStyle(color: Colors.white, fontSize: 20));
+                                  }
+                                }, future: _getUserName()));
+                              } else {
+                                return Icon(Icons.door_back_door);
+                              }
+                            } else {
+                              return CircularProgressIndicator();
+                            }
+
+                          }, future: AuthorizationManager().isAuthorized(),
+                        ),
+                        onPressed: () async {
+                          showMenu(context: context, 
+                          position: RelativeRect.fromLTRB(100, 80, 0, 0),
+                          items: 
+                            await AuthorizationManager().isAuthorized() ? [
+                              PopupMenuItem(child: Text("Профиль"), value: 1),
+                              PopupMenuItem(child: Text("Настройки"), value: 2),
+                              PopupMenuItem(child: Text("Выйти"), value: 3),
+                            ] : [
+                              PopupMenuItem(child: Text("Войти"), value: 4)]
+                          
+                      );},
+
+                      )
                     ],
                   ),
                 ),
@@ -70,6 +113,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
         ));
   }
+}
+
+Future<String> _getUserName() async {
+  var name = await TokenApi.getName();
+  return name;
 }
 
 class AppBarElement {
