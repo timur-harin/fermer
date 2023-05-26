@@ -102,7 +102,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                             ] : [
                               PopupMenuItem(child: Text("Войти"), value: 4)]
                           
-                      );},
+                      );
+                      },
 
                       )
                     ],
