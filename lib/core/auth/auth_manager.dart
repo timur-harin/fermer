@@ -58,7 +58,7 @@ class AuthorizationManager {
     var data = {
       "email": email,
       "username": username,
-      "full_name": "-",
+      "full_name": username,
       "password": password,
       "role": role
     };

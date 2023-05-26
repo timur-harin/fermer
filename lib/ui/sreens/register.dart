@@ -173,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     .copyWith(
                                         color: const Color.fromRGBO(
                                             0, 32, 51, 0.35))),
-                            obscureText: false,
+                            obscureText: true,
                           ),
                         ),
                       ],
