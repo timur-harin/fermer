@@ -58,21 +58,22 @@ class AuthorizationManager {
     var data = {
       "email": email,
       "username": username,
+      "full_name": "-",
       "password": password,
       "role": role
     };
     print(data);
     Response? response;
     try {
-      response = await _dio.post("${ServerSettings.baseUrl}/users/register/",
-          queryParameters: {"Content-Type": "application/json"}, data: data);
+      response = await _dio.post("${ServerSettings.baseUrl}/users/register/", data: data);
     } on DioError catch (e) {
       if (e.response == null)
         return AccountCreateResult()
           ..errorMessage = "Connection to server lost.";
       if (e.response!.statusCode == 400) {
+        print(e.response!.data);
         return AccountCreateResult()
-          ..errorMessage = "A user with that username already exists.";
+          ..errorMessage = e.message;
       }
     }
     if (response == null) {
