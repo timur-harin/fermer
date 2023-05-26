@@ -21,12 +21,12 @@ class ServerApi {
   }
 
   Future<Response> get(String? relativeUrl, String? accessToken) async {
-    TokenApi.refreshTokens();
+    await TokenApi.refreshTokens();
     var response;
     var fullUrl = "$_baseUrl$relativeUrl";
     try {
       response = await _dio.get(fullUrl,
-          options: Options(headers: {"Authorization": "Bearer $accessToken"}));
+          options: Options(method: "GET", headers: {"Authorization": "Bearer $accessToken"}));
     } on DioError catch (e) {
       print(e.message);
     }

@@ -70,16 +70,16 @@ class _LoginPageState extends State<LoginPage> {
                               height: MediaQuery.of(context).size.height * 0.07,
                               child: TextFormField(
                                 controller: _mailController,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Пожалуйста, введите почту';
-                                  } else if (!RegExp(
-                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                      .hasMatch(value)) {
-                                    return 'Пожалуйста, введите корректную почту';
-                                  }
-                                  return null;
-                                },
+                                // `validator: (value) {
+                                //   if (value!.isEmpty) {
+                                //     return 'Пожалуйста, введите почту';
+                                //   } else if (!RegExp(
+                                //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                //       .hasMatch(value)) {
+                                //     return 'Пожалуйста, введите корректную почту';
+                                //   }
+                                //   return null;
+                                // },`
                                 decoration: InputDecoration(
                                   hintStyle: Theme.of(context)
                                       .textTheme
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                     .copyWith(
                                         color: const Color.fromRGBO(
                                             0, 32, 51, 0.35))),
-                            obscureText: false,
+                            obscureText: true,
                           ),
                         ),
                       ],
