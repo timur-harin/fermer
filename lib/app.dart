@@ -6,10 +6,8 @@ import 'ui/sreens/register.dart';
 import 'ui/sreens/start.dart';
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
     return MaterialApp(
       theme: CustomUI().theme,
       title: 'Fresh Market',
