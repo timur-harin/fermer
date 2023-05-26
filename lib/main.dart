@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // final textTheme = Theme.of(context).textTheme;
     return MaterialApp(
-      title: 'Test',
+      title: 'Fresh Market',
       debugShowCheckedModeBanner: false,
       home: LoginPage()
     );
