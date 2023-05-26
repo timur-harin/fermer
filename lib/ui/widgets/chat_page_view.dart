@@ -6,7 +6,7 @@ import 'package:fermer/ui/widgets/messages/sent_message.dart';
 class ChatPageView extends StatefulWidget {
   final String? username;
 
-  const ChatPageView({
+  ChatPageView({
     Key? key,
     this.username,
   }) : super(key: key);
