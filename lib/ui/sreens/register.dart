@@ -59,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 24, 0, 24),
                     child: Text(
-                      'Авторизация',
+                      'Регистрация',
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),

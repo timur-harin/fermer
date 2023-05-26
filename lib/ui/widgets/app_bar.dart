@@ -21,7 +21,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: Size.fromWidth(100),
         child: Container(
           color: Theme.of(context).scaffoldBackgroundColor,
           child: Padding(
