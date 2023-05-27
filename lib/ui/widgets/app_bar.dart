@@ -185,8 +185,6 @@ class AppBarElement {
 }
 
 Future<bool> _isAuthorized() async {
-  print('wait');
   var isAuth = await AuthorizationManager().isAuthorized();
-  print(isAuth);
   return isAuth;
 }

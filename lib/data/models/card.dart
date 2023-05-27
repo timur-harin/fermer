@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'card.freezed.dart';
+part 'card.g.dart';
 
 @freezed
 class Card with _$Card {
@@ -9,4 +10,6 @@ class Card with _$Card {
       required String name,
       required DateTime date,
       required String cvc}) = _Card;
+
+  factory Card.fromJson(Map<String, Object?> json) => _$CardFromJson(json);
 }

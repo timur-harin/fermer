@@ -14,22 +14,28 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Item _$ItemFromJson(Map<String, dynamic> json) {
+  return _Item.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Item {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  double get costRetail => throw _privateConstructorUsedError;
-  double? get costWholesale => throw _privateConstructorUsedError;
-  DateTime? get completedDate => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  User get fermer => throw _privateConstructorUsedError;
+  double get cost_retail => throw _privateConstructorUsedError;
+  double? get cost_wholesale => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
+  User? get farmer => throw _privateConstructorUsedError;
   double get number => throw _privateConstructorUsedError;
-  double? get numberForWholesale => throw _privateConstructorUsedError;
-  String get picture => throw _privateConstructorUsedError;
-  DateTime? get willExpired => throw _privateConstructorUsedError;
-  bool get isSubscribed => throw _privateConstructorUsedError;
-  double? get numberForMonthSubscriptions => throw _privateConstructorUsedError;
+  double? get number_wholesale => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  DateTime? get expire_date => throw _privateConstructorUsedError;
+  bool get subscriptable => throw _privateConstructorUsedError;
+  double? get number_for_month => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
+  String get doc => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ItemCopyWith<Item> get copyWith => throw _privateConstructorUsedError;
 }
@@ -40,21 +46,22 @@ abstract class $ItemCopyWith<$Res> {
       _$ItemCopyWithImpl<$Res, Item>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String name,
-      double costRetail,
-      double? costWholesale,
-      DateTime? completedDate,
-      String description,
-      User fermer,
+      double cost_retail,
+      double? cost_wholesale,
+      DateTime? date,
+      User? farmer,
       double number,
-      double? numberForWholesale,
-      String picture,
-      DateTime? willExpired,
-      bool isSubscribed,
-      double? numberForMonthSubscriptions});
+      double? number_wholesale,
+      String description,
+      DateTime? expire_date,
+      bool subscriptable,
+      double? number_for_month,
+      String category,
+      String doc});
 
-  $UserCopyWith<$Res> get fermer;
+  $UserCopyWith<$Res>? get farmer;
 }
 
 /// @nodoc
@@ -70,81 +77,90 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
-    Object? costRetail = null,
-    Object? costWholesale = freezed,
-    Object? completedDate = freezed,
-    Object? description = null,
-    Object? fermer = null,
+    Object? cost_retail = null,
+    Object? cost_wholesale = freezed,
+    Object? date = freezed,
+    Object? farmer = freezed,
     Object? number = null,
-    Object? numberForWholesale = freezed,
-    Object? picture = null,
-    Object? willExpired = freezed,
-    Object? isSubscribed = null,
-    Object? numberForMonthSubscriptions = freezed,
+    Object? number_wholesale = freezed,
+    Object? description = null,
+    Object? expire_date = freezed,
+    Object? subscriptable = null,
+    Object? number_for_month = freezed,
+    Object? category = null,
+    Object? doc = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      costRetail: null == costRetail
-          ? _value.costRetail
-          : costRetail // ignore: cast_nullable_to_non_nullable
+      cost_retail: null == cost_retail
+          ? _value.cost_retail
+          : cost_retail // ignore: cast_nullable_to_non_nullable
               as double,
-      costWholesale: freezed == costWholesale
-          ? _value.costWholesale
-          : costWholesale // ignore: cast_nullable_to_non_nullable
+      cost_wholesale: freezed == cost_wholesale
+          ? _value.cost_wholesale
+          : cost_wholesale // ignore: cast_nullable_to_non_nullable
               as double?,
-      completedDate: freezed == completedDate
-          ? _value.completedDate
-          : completedDate // ignore: cast_nullable_to_non_nullable
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      fermer: null == fermer
-          ? _value.fermer
-          : fermer // ignore: cast_nullable_to_non_nullable
-              as User,
+      farmer: freezed == farmer
+          ? _value.farmer
+          : farmer // ignore: cast_nullable_to_non_nullable
+              as User?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as double,
-      numberForWholesale: freezed == numberForWholesale
-          ? _value.numberForWholesale
-          : numberForWholesale // ignore: cast_nullable_to_non_nullable
+      number_wholesale: freezed == number_wholesale
+          ? _value.number_wholesale
+          : number_wholesale // ignore: cast_nullable_to_non_nullable
               as double?,
-      picture: null == picture
-          ? _value.picture
-          : picture // ignore: cast_nullable_to_non_nullable
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
-      willExpired: freezed == willExpired
-          ? _value.willExpired
-          : willExpired // ignore: cast_nullable_to_non_nullable
+      expire_date: freezed == expire_date
+          ? _value.expire_date
+          : expire_date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      isSubscribed: null == isSubscribed
-          ? _value.isSubscribed
-          : isSubscribed // ignore: cast_nullable_to_non_nullable
+      subscriptable: null == subscriptable
+          ? _value.subscriptable
+          : subscriptable // ignore: cast_nullable_to_non_nullable
               as bool,
-      numberForMonthSubscriptions: freezed == numberForMonthSubscriptions
-          ? _value.numberForMonthSubscriptions
-          : numberForMonthSubscriptions // ignore: cast_nullable_to_non_nullable
+      number_for_month: freezed == number_for_month
+          ? _value.number_for_month
+          : number_for_month // ignore: cast_nullable_to_non_nullable
               as double?,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      doc: null == doc
+          ? _value.doc
+          : doc // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get fermer {
-    return $UserCopyWith<$Res>(_value.fermer, (value) {
-      return _then(_value.copyWith(fermer: value) as $Val);
+  $UserCopyWith<$Res>? get farmer {
+    if (_value.farmer == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.farmer!, (value) {
+      return _then(_value.copyWith(farmer: value) as $Val);
     });
   }
 }
@@ -156,22 +172,23 @@ abstract class _$$_ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String name,
-      double costRetail,
-      double? costWholesale,
-      DateTime? completedDate,
-      String description,
-      User fermer,
+      double cost_retail,
+      double? cost_wholesale,
+      DateTime? date,
+      User? farmer,
       double number,
-      double? numberForWholesale,
-      String picture,
-      DateTime? willExpired,
-      bool isSubscribed,
-      double? numberForMonthSubscriptions});
+      double? number_wholesale,
+      String description,
+      DateTime? expire_date,
+      bool subscriptable,
+      double? number_for_month,
+      String category,
+      String doc});
 
   @override
-  $UserCopyWith<$Res> get fermer;
+  $UserCopyWith<$Res>? get farmer;
 }
 
 /// @nodoc
@@ -183,125 +200,135 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
-    Object? costRetail = null,
-    Object? costWholesale = freezed,
-    Object? completedDate = freezed,
-    Object? description = null,
-    Object? fermer = null,
+    Object? cost_retail = null,
+    Object? cost_wholesale = freezed,
+    Object? date = freezed,
+    Object? farmer = freezed,
     Object? number = null,
-    Object? numberForWholesale = freezed,
-    Object? picture = null,
-    Object? willExpired = freezed,
-    Object? isSubscribed = null,
-    Object? numberForMonthSubscriptions = freezed,
+    Object? number_wholesale = freezed,
+    Object? description = null,
+    Object? expire_date = freezed,
+    Object? subscriptable = null,
+    Object? number_for_month = freezed,
+    Object? category = null,
+    Object? doc = null,
   }) {
     return _then(_$_Item(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      costRetail: null == costRetail
-          ? _value.costRetail
-          : costRetail // ignore: cast_nullable_to_non_nullable
+      cost_retail: null == cost_retail
+          ? _value.cost_retail
+          : cost_retail // ignore: cast_nullable_to_non_nullable
               as double,
-      costWholesale: freezed == costWholesale
-          ? _value.costWholesale
-          : costWholesale // ignore: cast_nullable_to_non_nullable
+      cost_wholesale: freezed == cost_wholesale
+          ? _value.cost_wholesale
+          : cost_wholesale // ignore: cast_nullable_to_non_nullable
               as double?,
-      completedDate: freezed == completedDate
-          ? _value.completedDate
-          : completedDate // ignore: cast_nullable_to_non_nullable
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      fermer: null == fermer
-          ? _value.fermer
-          : fermer // ignore: cast_nullable_to_non_nullable
-              as User,
+      farmer: freezed == farmer
+          ? _value.farmer
+          : farmer // ignore: cast_nullable_to_non_nullable
+              as User?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as double,
-      numberForWholesale: freezed == numberForWholesale
-          ? _value.numberForWholesale
-          : numberForWholesale // ignore: cast_nullable_to_non_nullable
+      number_wholesale: freezed == number_wholesale
+          ? _value.number_wholesale
+          : number_wholesale // ignore: cast_nullable_to_non_nullable
               as double?,
-      picture: null == picture
-          ? _value.picture
-          : picture // ignore: cast_nullable_to_non_nullable
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
-      willExpired: freezed == willExpired
-          ? _value.willExpired
-          : willExpired // ignore: cast_nullable_to_non_nullable
+      expire_date: freezed == expire_date
+          ? _value.expire_date
+          : expire_date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      isSubscribed: null == isSubscribed
-          ? _value.isSubscribed
-          : isSubscribed // ignore: cast_nullable_to_non_nullable
+      subscriptable: null == subscriptable
+          ? _value.subscriptable
+          : subscriptable // ignore: cast_nullable_to_non_nullable
               as bool,
-      numberForMonthSubscriptions: freezed == numberForMonthSubscriptions
-          ? _value.numberForMonthSubscriptions
-          : numberForMonthSubscriptions // ignore: cast_nullable_to_non_nullable
+      number_for_month: freezed == number_for_month
+          ? _value.number_for_month
+          : number_for_month // ignore: cast_nullable_to_non_nullable
               as double?,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      doc: null == doc
+          ? _value.doc
+          : doc // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Item implements _Item {
   const _$_Item(
-      {required this.id,
+      {this.id,
       required this.name,
-      required this.costRetail,
-      this.costWholesale,
-      this.completedDate,
-      required this.description,
-      required this.fermer,
+      required this.cost_retail,
+      this.cost_wholesale,
+      this.date,
+      this.farmer,
       required this.number,
-      this.numberForWholesale,
-      required this.picture,
-      this.willExpired,
-      required this.isSubscribed,
-      this.numberForMonthSubscriptions});
+      this.number_wholesale,
+      required this.description,
+      this.expire_date,
+      required this.subscriptable,
+      this.number_for_month,
+      required this.category,
+      required this.doc});
+
+  factory _$_Item.fromJson(Map<String, dynamic> json) => _$$_ItemFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String name;
   @override
-  final double costRetail;
+  final double cost_retail;
   @override
-  final double? costWholesale;
+  final double? cost_wholesale;
   @override
-  final DateTime? completedDate;
+  final DateTime? date;
   @override
-  final String description;
-  @override
-  final User fermer;
+  final User? farmer;
   @override
   final double number;
   @override
-  final double? numberForWholesale;
+  final double? number_wholesale;
   @override
-  final String picture;
+  final String description;
   @override
-  final DateTime? willExpired;
+  final DateTime? expire_date;
   @override
-  final bool isSubscribed;
+  final bool subscriptable;
   @override
-  final double? numberForMonthSubscriptions;
+  final double? number_for_month;
+  @override
+  final String category;
+  @override
+  final String doc;
 
   @override
   String toString() {
-    return 'Item(id: $id, name: $name, costRetail: $costRetail, costWholesale: $costWholesale, completedDate: $completedDate, description: $description, fermer: $fermer, number: $number, numberForWholesale: $numberForWholesale, picture: $picture, willExpired: $willExpired, isSubscribed: $isSubscribed, numberForMonthSubscriptions: $numberForMonthSubscriptions)';
+    return 'Item(id: $id, name: $name, cost_retail: $cost_retail, cost_wholesale: $cost_wholesale, date: $date, farmer: $farmer, number: $number, number_wholesale: $number_wholesale, description: $description, expire_date: $expire_date, subscriptable: $subscriptable, number_for_month: $number_for_month, category: $category, doc: $doc)';
   }
 
   @override
@@ -311,95 +338,108 @@ class _$_Item implements _Item {
             other is _$_Item &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.costRetail, costRetail) ||
-                other.costRetail == costRetail) &&
-            (identical(other.costWholesale, costWholesale) ||
-                other.costWholesale == costWholesale) &&
-            (identical(other.completedDate, completedDate) ||
-                other.completedDate == completedDate) &&
+            (identical(other.cost_retail, cost_retail) ||
+                other.cost_retail == cost_retail) &&
+            (identical(other.cost_wholesale, cost_wholesale) ||
+                other.cost_wholesale == cost_wholesale) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.farmer, farmer) || other.farmer == farmer) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.number_wholesale, number_wholesale) ||
+                other.number_wholesale == number_wholesale) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.fermer, fermer) || other.fermer == fermer) &&
-            (identical(other.number, number) || other.number == number) &&
-            (identical(other.numberForWholesale, numberForWholesale) ||
-                other.numberForWholesale == numberForWholesale) &&
-            (identical(other.picture, picture) || other.picture == picture) &&
-            (identical(other.willExpired, willExpired) ||
-                other.willExpired == willExpired) &&
-            (identical(other.isSubscribed, isSubscribed) ||
-                other.isSubscribed == isSubscribed) &&
-            (identical(other.numberForMonthSubscriptions,
-                    numberForMonthSubscriptions) ||
-                other.numberForMonthSubscriptions ==
-                    numberForMonthSubscriptions));
+            (identical(other.expire_date, expire_date) ||
+                other.expire_date == expire_date) &&
+            (identical(other.subscriptable, subscriptable) ||
+                other.subscriptable == subscriptable) &&
+            (identical(other.number_for_month, number_for_month) ||
+                other.number_for_month == number_for_month) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.doc, doc) || other.doc == doc));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       id,
       name,
-      costRetail,
-      costWholesale,
-      completedDate,
-      description,
-      fermer,
+      cost_retail,
+      cost_wholesale,
+      date,
+      farmer,
       number,
-      numberForWholesale,
-      picture,
-      willExpired,
-      isSubscribed,
-      numberForMonthSubscriptions);
+      number_wholesale,
+      description,
+      expire_date,
+      subscriptable,
+      number_for_month,
+      category,
+      doc);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_ItemCopyWith<_$_Item> get copyWith =>
       __$$_ItemCopyWithImpl<_$_Item>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ItemToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Item implements Item {
   const factory _Item(
-      {required final int id,
+      {final int? id,
       required final String name,
-      required final double costRetail,
-      final double? costWholesale,
-      final DateTime? completedDate,
-      required final String description,
-      required final User fermer,
+      required final double cost_retail,
+      final double? cost_wholesale,
+      final DateTime? date,
+      final User? farmer,
       required final double number,
-      final double? numberForWholesale,
-      required final String picture,
-      final DateTime? willExpired,
-      required final bool isSubscribed,
-      final double? numberForMonthSubscriptions}) = _$_Item;
+      final double? number_wholesale,
+      required final String description,
+      final DateTime? expire_date,
+      required final bool subscriptable,
+      final double? number_for_month,
+      required final String category,
+      required final String doc}) = _$_Item;
+
+  factory _Item.fromJson(Map<String, dynamic> json) = _$_Item.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String get name;
   @override
-  double get costRetail;
+  double get cost_retail;
   @override
-  double? get costWholesale;
+  double? get cost_wholesale;
   @override
-  DateTime? get completedDate;
+  DateTime? get date;
   @override
-  String get description;
-  @override
-  User get fermer;
+  User? get farmer;
   @override
   double get number;
   @override
-  double? get numberForWholesale;
+  double? get number_wholesale;
   @override
-  String get picture;
+  String get description;
   @override
-  DateTime? get willExpired;
+  DateTime? get expire_date;
   @override
-  bool get isSubscribed;
+  bool get subscriptable;
   @override
-  double? get numberForMonthSubscriptions;
+  double? get number_for_month;
+  @override
+  String get category;
+  @override
+  String get doc;
   @override
   @JsonKey(ignore: true)
   _$$_ItemCopyWith<_$_Item> get copyWith => throw _privateConstructorUsedError;

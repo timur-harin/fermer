@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'card.dart';
 part 'user.freezed.dart';
+part 'user.g.dart';
 
 enum UserType { FM, BY, AD }
 
@@ -17,4 +18,6 @@ class User with _$User {
     required String password,
     Card? card,
   }) = _User;
+
+  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 }

@@ -155,13 +155,19 @@ class _LoginPageState extends State<LoginPage> {
                                 .authorize(_mailController.text,
                                     _passwordController.text);
                             if (response.isAuthorized == true) {
-                              Navigator.pushNamed(context, '/');
+                              if (response.type=="BY"){
+                                Navigator.pushNamed(context, '/');
+                              }
+                              else if (response.type=="FM"){
+                                Navigator.pushNamed(context, '/fermer');
+                              }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
+                                  backgroundColor: CustomColors.deepGreen,
                                   content:
-                                      Text(response.errorMessage ?? 'Ошибка'),
-                                  duration: const Duration(seconds: 5),
+                                      Text(response.errorMessage ?? 'Ошибка', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white)),
+                                  duration: const Duration(seconds: 3),
                                 ),
                               );
                             }

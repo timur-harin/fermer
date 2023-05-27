@@ -1,6 +1,7 @@
 import 'package:fermer/ui/kit/theme.dart';
 import 'package:flutter/material.dart';
 
+import 'ui/sreens/fermer.dart';
 import 'ui/sreens/login.dart';
 import 'ui/sreens/register.dart';
 import 'ui/sreens/start.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => StartPage(),
+        '/fermer': (context) => FermerPage(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
       },
