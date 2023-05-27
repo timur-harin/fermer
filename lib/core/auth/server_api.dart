@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -15,8 +16,12 @@ class ServerApi {
     TokenApi.refreshTokens();
 
     var fullUrl = "$_baseUrl$relativeUrl";
-    var response = await _dio.post(fullUrl,
-        queryParameters: {"Authorization": "Bearer $accessToken"}, data: data);
+    var response = await _dio.request(fullUrl,
+        options: Options(
+          method: "POST",
+          headers: {"Authorization": "Bearer $accessToken"}
+        ),
+        data: data);
     return response;
   }
 
@@ -41,5 +46,19 @@ class ServerApi {
 
     var response = await get("/users/me/", access);
     return response.data;
+  }
+
+  Future<dynamic> getId() async {
+    var access = await TokenApi.getAccessToken();
+    var refresh = await TokenApi.getRefreshToken();
+
+    var response;
+    try {
+      response = await get("/users/getId/", access);
+      print(response);
+    } catch (e) {
+      print(e.toString());
+    }
+    return response;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:fermer/ui/kit/theme.dart';
+import 'package:fermer/ui/widgets/chat_list_view.dart';
 import 'package:flutter/material.dart';
 
 import 'ui/sreens/fermer.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/fermer': (context) => FermerPage(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
+        '/chats': (context) => ChatListPage(title: "Сообщения")
       },
     );
   }
