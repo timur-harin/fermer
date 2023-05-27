@@ -13,14 +13,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final dio = Dio();
-  
+
   var _mailController = TextEditingController();
   var _passwordController = TextEditingController();
-    
+
   @override
   Widget build(BuildContext context) {
-    
-
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
@@ -55,7 +53,6 @@ class _LoginPageState extends State<LoginPage> {
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
-                  
                   Padding(
                     padding: const EdgeInsets.fromLTRB(35, 0, 35, 10),
                     child: Column(
@@ -89,7 +86,8 @@ class _LoginPageState extends State<LoginPage> {
                                               0, 32, 51, 0.35)),
                                   hintText: 'hello@test.ru',
                                 ),
-                                onSaved: (newValue) => _mailController.text = newValue!,
+                                onSaved: (newValue) =>
+                                    _mailController.text = newValue!,
                               )),
                         ]),
                   ),
@@ -106,7 +104,6 @@ class _LoginPageState extends State<LoginPage> {
                           width: MediaQuery.of(context).size.width * 0.2,
                           height: MediaQuery.of(context).size.height * 0.07,
                           child: TextFormField(
-                          
                             controller: _passwordController,
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -118,15 +115,11 @@ class _LoginPageState extends State<LoginPage> {
                               }
                               return null;
                             },
-                            
-                            
-                            onSaved: (newValue) => _passwordController.text = newValue!,
-                                
+                            onSaved: (newValue) =>
+                                _passwordController.text = newValue!,
                             decoration: InputDecoration(
-                              errorMaxLines: 2
-                              ,
+                                errorMaxLines: 2,
                                 hintText: '*********',
-                                
                                 hintStyle: Theme.of(context)
                                     .textTheme
                                     .displaySmall!
@@ -139,13 +132,13 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-
                   TextButton(
                     onPressed: () => Navigator.pushNamed(context, '/register'),
-
-                    child: Text("Еще нет аккаунта? Зарегистрируйся", style: Theme.of(context).textTheme.displaySmall,),
+                    child: Text(
+                      "Еще нет аккаунта? Зарегистрируйся",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
                   ),
-                  
                   Padding(
                     padding: const EdgeInsets.fromLTRB(35, 30, 35, 50),
                     child: ElevatedButton(
@@ -159,10 +152,8 @@ class _LoginPageState extends State<LoginPage> {
                         try {
                           if (_formKey.currentState!.validate()) {
                             var response = await AuthorizationManager()
-                                .authorize(
-                                    _mailController.text,
-                                    _passwordController.text
-                                    );
+                                .authorize(_mailController.text,
+                                    _passwordController.text);
                             if (response.isAuthorized == true) {
                               Navigator.pushNamed(context, '/');
                             } else {
@@ -179,7 +170,11 @@ class _LoginPageState extends State<LoginPage> {
                           print(e);
                         }
                       },
-                      child: Text('Войти', style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white)),
+                      child: Text('Войти',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(color: Colors.white)),
                     ),
                   ),
                 ],

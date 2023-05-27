@@ -20,7 +20,8 @@ class ChatListPageState extends State<ChatListPage> {
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(95.0),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
             child: TextField(
               controller: TextEditingController(),
               decoration: InputDecoration(
@@ -93,7 +94,8 @@ class ChatListView extends StatefulWidget {
   }
 }
 
-class ChatListViewState extends State<ChatListView> with TickerProviderStateMixin {
+class ChatListViewState extends State<ChatListView>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Column(

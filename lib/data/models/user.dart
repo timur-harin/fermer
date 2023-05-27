@@ -6,7 +6,7 @@ part 'user.freezed.dart';
 enum UserType { FM, BY, AD }
 
 @freezed
-class User with _$User{
+class User with _$User {
   const factory User({
     required int id,
     required String name,
@@ -17,5 +17,4 @@ class User with _$User{
     required String password,
     Card? card,
   }) = _User;
-
 }

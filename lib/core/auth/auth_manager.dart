@@ -24,7 +24,7 @@ class AuthorizationManager {
     Response? response;
     try {
       response = await _dio.post("${ServerSettings.baseUrl}/users/login/",
-          data: data, queryParameters: {"Content-Type": "application/json"});
+          data: data, queryParameters: {"Content-Type": "application/json"}).timeout(Duration(seconds: 3));
     } on DioError catch (e) {
       print(e);
       if (e.response == null)
@@ -43,7 +43,9 @@ class AuthorizationManager {
   }
 
   Future<bool> isAuthorized() async {
-    TokenApi.refreshTokens();
+    print("started");
+    await TokenApi.refreshTokens();
+    print("refreshed");
 
     String? refreshToken = await TokenApi.getRefreshToken();
     String? accessToken = await TokenApi.getAccessToken();
@@ -54,8 +56,6 @@ class AuthorizationManager {
     return true;
   }
 
-
-
   Future<AccountCreateResult> registerAccount(
       String email, String name, String password, String role) async {
     var data = {
@@ -64,10 +64,10 @@ class AuthorizationManager {
       "password": password,
       "role": role
     };
-    print(data);
     Response? response;
     try {
-      response = await _dio.post("${ServerSettings.baseUrl}/users/register/", data: data);
+      response = await _dio.post("${ServerSettings.baseUrl}/users/register/",
+          data: data).timeout(Duration(seconds: 3));
     } on DioError catch (e) {
       if (e.response == null)
         return AccountCreateResult()
@@ -84,11 +84,9 @@ class AuthorizationManager {
     await TokenApi.setRefreshToken(response.data["refresh"]);
     await TokenApi.setAccessToken(response.data["access"]);
     await TokenApi.saveName(email);
-    
 
     return AccountCreateResult()..isCreated = true;
   }
-
 
   void logout() {
     TokenApi.setAccessToken(null);
