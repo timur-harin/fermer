@@ -6,6 +6,7 @@ import 'package:fermer/core/utils/server_settings.dart';
 import 'package:fermer/core/utils/token_api.dart';
 
 class AuthResult {
+  String? type;
   bool isAuthorized = false;
   String? errorMessage;
 }
@@ -28,10 +29,10 @@ class AuthorizationManager {
     } on DioError catch (e) {
       print(e);
       if (e.response == null)
-        return AuthResult()..errorMessage = "Connection to server lost.";
+        return AuthResult()..errorMessage = "Потеря соединения с сервером";
       if (e.response!.statusCode == 401) {
         return AuthResult()
-          ..errorMessage = "No active account found with the given credentials";
+          ..errorMessage = "Неверный логин или пароль";
       }
     }
 
@@ -39,13 +40,11 @@ class AuthorizationManager {
     await TokenApi.setAccessToken(response.data["access"]);
     await TokenApi.saveName(email);
 
-    return AuthResult()..isAuthorized = true;
+    return AuthResult()..isAuthorized = true..type = response.data["role"];
   }
 
   Future<bool> isAuthorized() async {
-    print("started");
     await TokenApi.refreshTokens();
-    print("refreshed");
 
     String? refreshToken = await TokenApi.getRefreshToken();
     String? accessToken = await TokenApi.getAccessToken();

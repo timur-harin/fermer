@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+User _$UserFromJson(Map<String, dynamic> json) {
+  return _User.fromJson(json);
+}
+
 /// @nodoc
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
@@ -25,6 +29,7 @@ mixin _$User {
   String get password => throw _privateConstructorUsedError;
   Card? get card => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
@@ -194,7 +199,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_User implements _User {
   const _$_User(
       {required this.id,
@@ -205,6 +210,8 @@ class _$_User implements _User {
       required this.email,
       required this.password,
       this.card});
+
+  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
   final int id;
@@ -244,6 +251,7 @@ class _$_User implements _User {
             (identical(other.card, card) || other.card == card));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, name, role, address, phone, email, password, card);
@@ -253,6 +261,13 @@ class _$_User implements _User {
   @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserToJson(
+      this,
+    );
+  }
 }
 
 abstract class _User implements User {
@@ -265,6 +280,8 @@ abstract class _User implements User {
       required final String email,
       required final String password,
       final Card? card}) = _$_User;
+
+  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   int get id;

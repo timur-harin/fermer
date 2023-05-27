@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Card _$CardFromJson(Map<String, dynamic> json) {
+  return _Card.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Card {
   int get id => throw _privateConstructorUsedError;
@@ -22,6 +26,7 @@ mixin _$Card {
   DateTime get date => throw _privateConstructorUsedError;
   String get cvc => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CardCopyWith<Card> get copyWith => throw _privateConstructorUsedError;
 }
@@ -128,7 +133,7 @@ class __$$_CardCopyWithImpl<$Res> extends _$CardCopyWithImpl<$Res, _$_Card>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Card implements _Card {
   const _$_Card(
       {required this.id,
@@ -136,6 +141,8 @@ class _$_Card implements _Card {
       required this.name,
       required this.date,
       required this.cvc});
+
+  factory _$_Card.fromJson(Map<String, dynamic> json) => _$$_CardFromJson(json);
 
   @override
   final int id;
@@ -165,6 +172,7 @@ class _$_Card implements _Card {
             (identical(other.cvc, cvc) || other.cvc == cvc));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, number, name, date, cvc);
 
@@ -173,6 +181,13 @@ class _$_Card implements _Card {
   @pragma('vm:prefer-inline')
   _$$_CardCopyWith<_$_Card> get copyWith =>
       __$$_CardCopyWithImpl<_$_Card>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CardToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Card implements Card {
@@ -182,6 +197,8 @@ abstract class _Card implements Card {
       required final String name,
       required final DateTime date,
       required final String cvc}) = _$_Card;
+
+  factory _Card.fromJson(Map<String, dynamic> json) = _$_Card.fromJson;
 
   @override
   int get id;
