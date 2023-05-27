@@ -6,31 +6,29 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
 
-
-
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
 
   @override
-  Size get preferredSize => Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(100);
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
   List<AppBarElement> elements = [
     AppBarElement(title: "Заказы", path: "/orders", icon: Icons.shopping_cart),
     AppBarElement(title: "Избранное", path: "/favorites", icon: Icons.favorite),
-    AppBarElement(title: "Корзина", path: "/cart", icon: Icons.shopping_basket),  
+    AppBarElement(title: "Корзина", path: "/cart", icon: Icons.shopping_basket),
   ];
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return PreferredSize(
-        preferredSize: Size.fromWidth(100),
+        preferredSize: const Size.fromWidth(100),
         child: Container(
           color: Theme.of(context).scaffoldBackgroundColor,
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -38,81 +36,138 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(children:[
-                      Image.asset(
-                        'assets/icons/icon.png',
-                        height: 50,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text("Fresh Market", style: Theme.of(context).textTheme.displayLarge),
-                      ), 
+                      Row(children: [
+                        Image.asset(
+                          'assets/icons/icon.png',
+                          height: 50,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text("Fresh Market",
+                              style: Theme.of(context).textTheme.displayLarge),
+                        ),
                       ]),
                       SizedBox(width: screenSize.width / 20),
-                      
 
                       // Here search bar
-                      Spacer(),
+                      const Spacer(),
                       for (AppBarElement element in elements)
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: InkWell(
-                            onTap: () {
-                              
-                            },
-
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                              Icon(element.icon),
-                              Text(element.title),
-                          
-                            ],)
-                          ),
+                              onTap: () {},
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(element.icon),
+                                  Text(element.title),
+                                ],
+                              )),
                         ),
-                      
-                      IconButton(
-                        icon: FutureBuilder(builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              if (snapshot.data == true) {
-                                return CircleAvatar(radius: 40, backgroundColor: CustomColors.deepGreen, child: FutureBuilder(builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(snapshot.data![0], style: TextStyle(color: Colors.white, fontSize: 20));
-                                  } else {
-                                    return Text("-", style: TextStyle(color: Colors.white, fontSize: 20));
-                                  }
-                                }, future: _getUserName()));
+                        FutureBuilder(
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                if (snapshot.data == true) {
+                                  return PopupMenuButton(
+                                    position: PopupMenuPosition.under,
+                                    icon: CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: CustomColors.deepGreen,
+                                      child: FutureBuilder(
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              return Text(snapshot.data![0],
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20));
+                                            } else {
+                                              return const Text("-",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20));
+                                            }
+                                          },
+                                          future: _getUserName())),
+                                        itemBuilder: (context) => [
+                                          const PopupMenuItem(
+                                              value: 1,
+                                              child: Text("Профиль")),
+                                          const PopupMenuItem(
+                                              value: 2,
+                                              child: Text("Настройки")),
+                                          const PopupMenuItem(
+                                              value: 3,
+                                              child: Text("Выйти")),
+                                        ],
+                                        onSelected: (value) {
+                                          if (value == 1) {
+                                            setState(() {
+                                              Navigator.pushNamed(
+                                                  context, "/profile");
+                                            });
+                                          } else if (value == 2) {
+                                            setState(() {
+                                              Navigator.pushNamed(
+                                                  context, "/settings");
+                                            });
+                                          } else if (value == 3) {
+                                            setState(() {
+                                              AuthorizationManager().logout();
+                                              // Navigator.pushNamed(context, "/login");
+                                            });
+                                          }
+                                        },
+                                      );
+                                } else {
+                                  return PopupMenuButton(
+
+                                     position: PopupMenuPosition.under,
+                                        //  offset:
+                                    //  RelativeRect.fromLTRB(100, 80, 0, 0),
+                                        icon: const Icon(Icons.login),
+                                        itemBuilder: (context) => [
+                                          const PopupMenuItem(
+                                              value: 4,
+                                              child: Text("Войти")),
+                                        ],
+                                        onSelected: (value) {
+                                          if (value == 4) {
+                                            setState(() {
+                                              Navigator.pushNamed(
+                                                  context, "/login");
+                                            });
+                                          }
+                                        },
+                                      );
+                                }
                               } else {
-                                return Icon(Icons.door_back_door);
+                                return PopupMenuButton(
+                                  position: PopupMenuPosition.under,
+                                        icon: const Icon(Icons.login),
+                                        itemBuilder: (context) => [
+                                          const PopupMenuItem(
+                                              value: 4,
+                                              child: Text("Войти")),
+                                        ],
+                                        onSelected: (value) {
+                                          if (value == 4) {
+                                            setState(() {
+                                              Navigator.pushNamed(
+                                                  context, "/login");
+                                            });
+                                          }
+                                        },
+                                      );
                               }
-                            } else {
-                              return CircularProgressIndicator();
-                            }
-
-                          }, future: AuthorizationManager().isAuthorized(),
-                        ),
-                        onPressed: () async {
-                          showMenu(context: context, 
-                          position: RelativeRect.fromLTRB(100, 80, 0, 0),
-                          items: 
-                            await AuthorizationManager().isAuthorized() ? [
-                              PopupMenuItem(child: Text("Профиль"), value: 1),
-                              PopupMenuItem(child: Text("Настройки"), value: 2),
-                              PopupMenuItem(child: Text("Выйти"), value: 3),
-                            ] : [
-                              PopupMenuItem(child: Text("Войти"), value: 4)]
+                            },
+                            future: _isAuthorized(),
+                          ),
                           
-                      );
-                      },
-
-                      )
-                    ],
-                  ),
-                ),
+                               
               ],
             ),
           ),
-        ));
+        ]))));
   }
 }
 
@@ -127,4 +182,11 @@ class AppBarElement {
   final IconData icon;
   final String title;
   final String path;
+}
+
+Future<bool> _isAuthorized() async {
+  print('wait');
+  var isAuth = await AuthorizationManager().isAuthorized();
+  print(isAuth);
+  return isAuth;
 }

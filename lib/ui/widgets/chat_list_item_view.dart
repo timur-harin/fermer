@@ -10,7 +10,10 @@ class ChatListItemWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChatPageView(username: "Dinesh Ahuja",)),
+          MaterialPageRoute(
+              builder: (context) => ChatPageView(
+                    username: "Dinesh Ahuja",
+                  )),
         );
       },
       leading: InkWell(

@@ -36,9 +36,9 @@ class _ChatPageViewState extends State<ChatPageView> {
               )),
           child: const Center(
               child: Text(
-                "Today",
-                style: TextStyle(fontSize: 11),
-              )),
+            "Today",
+            style: TextStyle(fontSize: 11),
+          )),
         )));
     childList.add(const Align(
       alignment: Alignment(1, 0),
@@ -68,7 +68,7 @@ class _ChatPageViewState extends State<ChatPageView> {
       alignment: Alignment(1, 0),
       child: SentMessageWidget(
         content:
-        'I am good. Can you do something for me? I need your help my bro.',
+            'I am good. Can you do something for me? I need your help my bro.',
         time: '22:40 PM',
         isImage: false,
       ),
@@ -129,7 +129,7 @@ class _ChatPageViewState extends State<ChatPageView> {
                         const Spacer(),
                         Padding(
                           padding:
-                          const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                              const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
                           child: Container(
                             height: 55,
                             width: 55,

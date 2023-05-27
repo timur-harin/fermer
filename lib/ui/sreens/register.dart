@@ -16,19 +16,15 @@ enum UserType { FM, BY, AD }
 class _RegisterPageState extends State<RegisterPage> {
   final dio = Dio();
 
-    var _nameController = TextEditingController();
-    var _mailController = TextEditingController();
-    var _passwordController = TextEditingController();
-    UserType selectedUserType = UserType.BY;
-    
-      
+  var _nameController = TextEditingController();
+  var _mailController = TextEditingController();
+  var _passwordController = TextEditingController();
+  UserType selectedUserType = UserType.BY;
 
-  List<bool> isSelected = [false,true];
+  List<bool> isSelected = [false, true];
 
   @override
   Widget build(BuildContext context) {
-    
-
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
@@ -92,7 +88,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                               0, 32, 51, 0.35)),
                                   hintText: 'Иван',
                                 ),
-                                onSaved: (newValue) => _nameController.text = newValue!,
+                                onSaved: (newValue) =>
+                                    _nameController.text = newValue!,
                               )),
                         ]),
                   ),
@@ -129,7 +126,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                               0, 32, 51, 0.35)),
                                   hintText: 'hello@test.ru',
                                 ),
-                                onSaved: (newValue) => _mailController.text = newValue!,
+                                onSaved: (newValue) =>
+                                    _mailController.text = newValue!,
                               )),
                         ]),
                   ),
@@ -146,7 +144,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           width: MediaQuery.of(context).size.width * 0.2,
                           height: MediaQuery.of(context).size.height * 0.07,
                           child: TextFormField(
-                          
                             controller: _passwordController,
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -158,15 +155,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               }
                               return null;
                             },
-                            
-                            
-                            onSaved: (newValue) => _passwordController.text = newValue!,
-                                
+                            onSaved: (newValue) =>
+                                _passwordController.text = newValue!,
                             decoration: InputDecoration(
-                              errorMaxLines: 2
-                              ,
+                                errorMaxLines: 2,
                                 hintText: '*********',
-                                
                                 hintStyle: Theme.of(context)
                                     .textTheme
                                     .displaySmall!
@@ -186,54 +179,69 @@ class _RegisterPageState extends State<RegisterPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: ColorFiltered(
-                            colorFilter: ColorFilter.mode(
-                                  isSelected[0] ? CustomColors.deepGreen : CustomColors.grey
-                                  , BlendMode.srcIn),
-                            child:  Container(
-                              decoration: isSelected[0] ? BoxDecoration(
-                                border: Border.all(color: CustomColors.deepGreen),
-                                borderRadius: BorderRadius.circular(10),
-                              ) : null, 
-                              
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          "assets/icons/farmer.png",
-                                          height: 50,
-                                        ),
-                                        Text(
-                                          "Продавец",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall!
-                                              .copyWith(color: isSelected[0] ? CustomColors.deepGreen : CustomColors.grey),
-                                        ),
-                                      ],
-                                    )),
-                              
-                                )
-                                ),
-                                onTap: () => setState(() {
-                                selectedUserType = UserType.FM;
-                                isSelected[1] = false;
-                                isSelected[0] = true;
-                                }
-                            ),  
+                                  colorFilter: ColorFilter.mode(
+                                      isSelected[0]
+                                          ? CustomColors.deepGreen
+                                          : CustomColors.grey,
+                                      BlendMode.srcIn),
+                                  child: Container(
+                                      decoration: isSelected[0]
+                                          ? BoxDecoration(
+                                              border: Border.all(
+                                                  color:
+                                                      CustomColors.deepGreen),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            )
+                                          : null,
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            "assets/icons/farmer.png",
+                                            height: 50,
+                                          ),
+                                          Text(
+                                            "Продавец",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displaySmall!
+                                                .copyWith(
+                                                    color: isSelected[0]
+                                                        ? CustomColors.deepGreen
+                                                        : CustomColors.grey),
+                                          ),
+                                        ],
+                                      )),
+                                )),
+                            onTap: () => setState(() {
+                              selectedUserType = UserType.FM;
+                              isSelected[1] = false;
+                              isSelected[0] = true;
+                            }),
                           ),
                           InkWell(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               child: ColorFiltered(
                                 colorFilter: ColorFilter.mode(
-                                    isSelected[1] ? CustomColors.deepGreen : CustomColors.grey, BlendMode.srcIn),
+                                    isSelected[1]
+                                        ? CustomColors.deepGreen
+                                        : CustomColors.grey,
+                                    BlendMode.srcIn),
                                 child: Container(
-                                    decoration: isSelected[1] ? BoxDecoration(
-                                      border: Border.all(color: CustomColors.deepGreen),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ) : null,
+                                    decoration: isSelected[1]
+                                        ? BoxDecoration(
+                                            border: Border.all(
+                                                color: CustomColors.deepGreen),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          )
+                                        : null,
                                     child: Row(
                                       children: [
                                         Image.asset(
@@ -245,7 +253,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .displaySmall!
-                                              .copyWith(color: isSelected[1] ? CustomColors.deepGreen : CustomColors.grey),
+                                              .copyWith(
+                                                  color: isSelected[1]
+                                                      ? CustomColors.deepGreen
+                                                      : CustomColors.grey),
                                         ),
                                       ],
                                     )),
@@ -255,7 +266,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               selectedUserType = UserType.BY;
                               isSelected[0] = false;
                               isSelected[1] = true;
-
                             }),
                           )
                         ],
@@ -264,10 +274,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   TextButton(
                     onPressed: () => Navigator.pushNamed(context, '/login'),
-
-                    child: Text("Уже есть аккаунт? Войти", style: Theme.of(context).textTheme.displaySmall,),
+                    child: Text(
+                      "Уже есть аккаунт? Войти",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.fromLTRB(35, 30, 35, 50),
                     child: ElevatedButton(
@@ -302,7 +313,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           print(e);
                         }
                       },
-                      child: Text('Зарегистрироваться', style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white)),
+                      child: Text('Зарегистрироваться',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(color: Colors.white)),
                     ),
                   ),
                 ],
