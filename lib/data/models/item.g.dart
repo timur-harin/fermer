@@ -13,9 +13,7 @@ _$_Item _$$_ItemFromJson(Map<String, dynamic> json) => _$_Item(
       cost_wholesale: (json['cost_wholesale'] as num?)?.toDouble(),
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
-      farmer: json['farmer'] == null
-          ? null
-          : User.fromJson(json['farmer'] as Map<String, dynamic>),
+      farmer: json['farmer'] as int?,
       number: (json['number'] as num).toDouble(),
       number_wholesale: (json['number_wholesale'] as num?)?.toDouble(),
       description: json['description'] as String,

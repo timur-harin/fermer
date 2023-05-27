@@ -25,7 +25,7 @@ mixin _$Item {
   double get cost_retail => throw _privateConstructorUsedError;
   double? get cost_wholesale => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
-  User? get farmer => throw _privateConstructorUsedError;
+  int? get farmer => throw _privateConstructorUsedError;
   double get number => throw _privateConstructorUsedError;
   double? get number_wholesale => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $ItemCopyWith<$Res> {
       double cost_retail,
       double? cost_wholesale,
       DateTime? date,
-      User? farmer,
+      int? farmer,
       double number,
       double? number_wholesale,
       String description,
@@ -60,8 +60,6 @@ abstract class $ItemCopyWith<$Res> {
       double? number_for_month,
       String category,
       String doc});
-
-  $UserCopyWith<$Res>? get farmer;
 }
 
 /// @nodoc
@@ -116,7 +114,7 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
       farmer: freezed == farmer
           ? _value.farmer
           : farmer // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as int?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -151,18 +149,6 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
               as String,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get farmer {
-    if (_value.farmer == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.farmer!, (value) {
-      return _then(_value.copyWith(farmer: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -177,7 +163,7 @@ abstract class _$$_ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
       double cost_retail,
       double? cost_wholesale,
       DateTime? date,
-      User? farmer,
+      int? farmer,
       double number,
       double? number_wholesale,
       String description,
@@ -186,9 +172,6 @@ abstract class _$$_ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
       double? number_for_month,
       String category,
       String doc});
-
-  @override
-  $UserCopyWith<$Res>? get farmer;
 }
 
 /// @nodoc
@@ -239,7 +222,7 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
       farmer: freezed == farmer
           ? _value.farmer
           : farmer // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as int?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -308,7 +291,7 @@ class _$_Item implements _Item {
   @override
   final DateTime? date;
   @override
-  final User? farmer;
+  final int? farmer;
   @override
   final double number;
   @override
@@ -400,7 +383,7 @@ abstract class _Item implements Item {
       required final double cost_retail,
       final double? cost_wholesale,
       final DateTime? date,
-      final User? farmer,
+      final int? farmer,
       required final double number,
       final double? number_wholesale,
       required final String description,
@@ -423,7 +406,7 @@ abstract class _Item implements Item {
   @override
   DateTime? get date;
   @override
-  User? get farmer;
+  int? get farmer;
   @override
   double get number;
   @override
