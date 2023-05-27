@@ -4,13 +4,13 @@ import 'package:fermer/ui/kit/colors.dart' as colors;
 class SentMessageWidget extends StatelessWidget {
   final String content;
   final String? imageAddress;
-  final String time;
+  final String? time;
   final bool isImage;
 
   const SentMessageWidget({
     Key? key,
     required this.content,
-    required this.time,
+    this.time,
     this.imageAddress,
     required this.isImage,
   }) : super(key: key);
@@ -63,15 +63,6 @@ class SentMessageWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-            Positioned(
-              bottom: 1,
-              left: 10,
-              child: Text(
-                time,
-                style: TextStyle(
-                    fontSize: 10, color: Colors.black.withOpacity(0.6)),
-              ),
-            )
           ]),
         ),
       ),

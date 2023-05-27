@@ -1,3 +1,5 @@
+import 'package:fermer/core/auth/server_api.dart';
+import 'package:fermer/core/utils/token_api.dart';
 import 'package:flutter/material.dart';
 import 'package:fermer/ui/kit/colors.dart' as colors;
 import 'package:fermer/ui/widgets/messages/received_message.dart';
@@ -5,10 +7,14 @@ import 'package:fermer/ui/widgets/messages/sent_message.dart';
 
 class ChatPageView extends StatefulWidget {
   final String? username;
+  final int? chatId;
+  final int? senderId;
 
   ChatPageView({
     Key? key,
     this.username,
+    this.chatId,
+    this.senderId
   }) : super(key: key);
 
   @override
@@ -23,65 +29,6 @@ class _ChatPageViewState extends State<ChatPageView> {
   @override
   void initState() {
     super.initState();
-    childList.add(Align(
-        alignment: const Alignment(0, 0),
-        child: Container(
-          margin: const EdgeInsets.only(top: 5.0),
-          height: 25,
-          width: 50,
-          decoration: const BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              )),
-          child: const Center(
-              child: Text(
-            "Today",
-            style: TextStyle(fontSize: 11),
-          )),
-        )));
-    childList.add(const Align(
-      alignment: Alignment(1, 0),
-      child: SentMessageWidget(
-        content: 'Hello',
-        time: '21:36 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(const Align(
-      alignment: Alignment(1, 0),
-      child: SentMessageWidget(
-        content: 'How are you? What are you doing?',
-        time: '21:36 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(const Align(
-      alignment: Alignment(-1, 0),
-      child: ReceivedMessageWidget(
-        content: 'Hello, Mohammad.I am fine. How are you?',
-        time: '22:40 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(const Align(
-      alignment: Alignment(1, 0),
-      child: SentMessageWidget(
-        content:
-            'I am good. Can you do something for me? I need your help my bro.',
-        time: '22:40 PM',
-        isImage: false,
-      ),
-    ));
-    childList.add(const Align(
-      alignment: Alignment(-1, 0),
-      child: ReceivedMessageWidget(
-        content: 'this is fun 😂',
-        time: '22:57 PM',
-        isImage: true,
-        imageAddress: 'assets/images/fun.jpg',
-      ),
-    ));
   }
 
   @override
@@ -185,9 +132,44 @@ class _ChatPageViewState extends State<ChatPageView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: childList,
-                        )),
-                  ),
+                          children: <Widget>[
+                            FutureBuilder(
+                              future: fetchData(widget.chatId!),
+                              builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                        return ListView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          itemCount: snapshot.data!.length,
+                                          itemBuilder: (context, index) {
+                                            if (snapshot.data![index]['sender'] == widget.senderId) {
+                                              return Align(
+                                                    alignment: Alignment(1, 0),
+                                                    child: SentMessageWidget(
+                                                      content: snapshot.data![index]['text'],
+                                                      isImage: false,
+                                                    )
+                                              );
+                                            } else {
+                                              return Align(
+                                                  alignment: Alignment(1, 0),
+                                                  child: ReceivedMessageWidget(
+                                                    content: snapshot.data![index]['text'],
+                                                    isImage: false,
+                                                  )
+                                              );
+                                            }
+                                          }
+                                        );
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
+                              }
+                            )
+                            ]
+                        )
+                    )
+                  )
                 ),
                 const Divider(height: 0, color: Colors.black26),
                 SizedBox(
@@ -206,14 +188,11 @@ class _ChatPageViewState extends State<ChatPageView> {
                             IconButton(
                               icon: const Icon(Icons.send),
                               onPressed: () {
-                                childList.add(Align(
-                                  alignment: const Alignment(1, 0),
-                                  child: SentMessageWidget(
-                                    content: _text.text,
-                                    time: '21:36 PM',
-                                    isImage: false,
-                                  ),
-                                ));
+                                setState(() {
+                                  print(_text.text);
+                                  postMessage(_text.text, widget.chatId!);
+                                  _text.clear();
+                                });
                               },
                             ),
                             IconButton(
@@ -234,5 +213,35 @@ class _ChatPageViewState extends State<ChatPageView> {
         ),
       ),
     );
+  }
+}
+
+
+
+Future<void> postMessage(String text, int chatId) async {
+  await TokenApi.refreshTokens();
+  var token = await TokenApi.getAccessToken();
+  final response = await ServerApi().post(
+      "/users/chat/$chatId/post_message",
+      token,
+      {'text': text}
+  );
+  print(response);
+}
+
+
+
+Future<List<dynamic>> fetchData(int chatId) async {
+  var token = await TokenApi.getAccessToken();
+  final response = await ServerApi().get("/users/chat/$chatId", token);
+  // print(response);
+  if (response.statusCode == 201 || response.statusCode == 200) {
+    print("success");
+
+    print(response.data['messages']);
+
+    return List<dynamic>.from(response.data['messages']);
+  } else {
+    throw Exception('Failed to fetch data');
   }
 }
