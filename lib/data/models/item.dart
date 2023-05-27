@@ -18,7 +18,7 @@ class Item with _$Item {
     required double cost_retail,
     double? cost_wholesale,
     DateTime? date,
-    User? farmer,
+    int? farmer,
     required double number,
     double? number_wholesale,
     required String description,
